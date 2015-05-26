@@ -1,0 +1,13 @@
+
+.orb_just_write_page_wrapper {
+    border: 2px solid #ccc;
+    padding: 5px;
+    margin: 5px 0;
+}
+
+.orb_just_write_page_wrapper .orb_just_write_page {
+    display: inline-block;
+    padding: 5px;
+    margin: 5px;
+    border: 1px solid #eee;
+}
