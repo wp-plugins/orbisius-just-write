@@ -45,13 +45,15 @@ Support is handled on our site: <a href="http://club.orbisius.com/support/" targ
 Please do NOT use the WordPress forums or other places to seek support.
 
 == Screenshots ==
-1. Shows the author box which allows you to change the author of a forum post
-2. Showing how the checkbox is checked off
+1. Shows how the editor box looks like. Super cool.
 
 == Upgrade Notice ==
 n/a
 
 == Changelog ==
+
+= 1.0.1 =
+* Corrections in the readme.
 
 = 1.0.0 =
 * Initial Release
