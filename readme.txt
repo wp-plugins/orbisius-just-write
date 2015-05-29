@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: wordpress,wp,blogging,blogger,blog,copywriting,content,content marketing,marketing,writing,marketing,dashboard,Orbisius,writing DFW,DFR,distraction free writing
 Requires at least: 3.3
 Tested up to: 4.2.2
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv2 or later
 
 Allows you to post content on multiple WordPress sites from one central location.
