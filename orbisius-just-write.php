@@ -3,7 +3,7 @@
 Plugin Name: Orbisius Just Write
 Plugin URI: http://club.orbisius.com/products/wordpress-plugins/orbisius-just-write/
 Description: Show last viewed post(s) - 3 max, and recommend X number of related posts.
-Version: 1.0.0
+Version: 1.0.1
 Author: Slavi Marinov | Orbisius
 Author URI: http://orbisius.com
 */

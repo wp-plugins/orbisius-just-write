@@ -38,6 +38,7 @@
     <script>
         var just_write_cfg = <?php echo json_encode( $just_write_cfg ); ?>;
     </script>
+    <?php wp_head(); ?>
   </head>
 
   <body role="document">
@@ -63,7 +64,28 @@
 				  </div>
 				</div>
 				<div class="panel-body">
-				  <textarea class='wide_field' id='post_content' name='post_content' rows='10' cols='10'><?php echo $post_content; ?></textarea>
+                  <!--<textarea class='wide_field' id='post_content' name='post_content' class='post_content' rows='10' cols='10'><?php //echo $post_content; ?></textarea>-->
+                  <?php if ( 1 || has_action( 'orbisius_just_write_action_post_content' ) ) : ?>
+                    <?php
+                        // @see got some ideas from https://plugins.svn.wordpress.org/indypress/tags/1.0/indypress/form_inputs/tinymce.php
+                        $content = esc_html( $post_content );
+                        $editor_id = 'post_content';
+                        $settings = array(
+                            'textarea_rows' => 14,
+                            /*'mode' => 'textareas',
+                            'editor_selector' => 'post_content',*/
+                            //'width' => '100%', 'height' => '400',
+                            'paste_auto_remove_styles' => 'true',
+                            'paste_auto_remove_spans' => 'true',
+                            'paste_auto_cleanup_on_paste' => 'true',
+                            /*'theme' => 'advanced',
+                            'skin' => 'default',*/
+                        );
+                        wp_editor( $content, $editor_id, $settings );
+                    ?>
+                  <?php else : ?>
+                    
+                  <?php endif; ?>
 				  
 				  <br/>
                   <div class="checkbox">
@@ -71,14 +93,16 @@
                           <input type="checkbox" name="publish" id="publish" class="setting_auto_save" value="1" checked="checked" />
                           Publish
                       </label>
+                      <?php if ( 0 ) : ?>
                       <label class="input-group">
                           <input type="checkbox" name="nl2br" id="nl2br" value="1" class="setting_auto_save" checked="checked" />
                           Convert new lines to HTML newlines (nl2br)
                       </label>
+                      <?php endif; ?>
                   </div>
 				  
 				  <div>
-                    <button type="submit" class="btn btn-sm btn-primary" name="btn_publish" value="btn_publish">Post Content</button>
+                    <button type="submit" class="btn btn-sm btn-primary" name="btn_publish" id="btn_publish" value="btn_publish">Post Content</button>
 				  </div>
 
                   <div id="message" class="message"></div>
@@ -177,6 +201,7 @@
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="<?php echo ORBISIUS_JUST_WRITE_URL; ?>/modules/js/main.js"></script>
-    
+
+    <?php wp_footer(); ?>
   </body>
 </html>

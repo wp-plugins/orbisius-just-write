@@ -49,6 +49,47 @@ var just_write_app = {
         nl2br: function (str) {
             str = str.replace(/[\n\r]/ig, '<br/>');
             return str;
+        },
+
+        tinymce : {
+            handle_before_save : function () {
+                tinyMCE.triggerSave();
+                var buff = just_write_app.util.tinymce.get_content_by_id( 'post_content' );
+                $('#post_content').html(buff);
+            },
+
+            /**
+             *
+             * @param {type} id string id of the element, no # or ,
+             * @returns str
+             * 
+             * @see PabloKarzin http://stackoverflow.com/questions/13797607/wp-editor-tiny-mce-getcontent-doesnt-return-content-of-html-view
+             * @see http://wordpress.stackexchange.com/questions/42652/how-to-get-the-input-of-a-tinymce-editor-when-using-on-the-front-end
+             */
+            get_content_by_id : function ( id ) {
+                var content;
+                var inputid = id;
+                var editor = tinyMCE.get(inputid);
+                var textArea = jQuery('textarea#' + inputid);
+
+                if ( textArea.length > 0 && textArea.is( ':visible' ) ) {
+                    content = textArea.val();
+                } else {
+                    content = editor.getContent();
+                }
+                
+                return content;
+            },
+
+            setup_on_key_down : function ( id ) {
+                var editor = tinyMCE.get(id);
+                
+                if ( editor ) {
+                    editor.on( 'keydown', function( args ) { 
+                        $('#post_content').trigger('keyup');
+                    } );
+                }
+            }
         }
     },
 
@@ -145,6 +186,10 @@ var just_write_app = {
 jQuery(document).ready(function ($) {
     just_write_app.sites.load();
 
+    setTimeout(function () {
+        just_write_app.util.tinymce.setup_on_key_down('post_content');
+    }, 1500);
+
     if ( typeof just_write_cfg.ed_prefs != 'undefined' ) {
         for ( var key in just_write_cfg.ed_prefs ) {
             var jq_key = '#' + key;
@@ -152,6 +197,11 @@ jQuery(document).ready(function ($) {
             $(jq_key).prop('checked', just_write_cfg.ed_prefs[ key ] ? 1 : 0 );
         }
     }
+
+    /*$('#btn_publish').on('change', function () {
+        just_write_app.util.tinymce.handle_before_save();
+        return false;
+    });*/
 
     $('.setting_auto_save').on('change', function () {
         just_write_app.handle_setting_auto_save(this);
@@ -193,6 +243,7 @@ jQuery(document).ready(function ($) {
     });
 
     $('#main_form').on('submit', function () {
+        just_write_app.util.tinymce.handle_before_save();
         just_write_app.loader(2);
 
         $.ajax({

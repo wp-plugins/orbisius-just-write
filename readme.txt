@@ -2,7 +2,7 @@
 Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wordpress,wp,blogging,blogger,blog,copywriting,content,content marketing,marketing,writing,marketing,dashboard,Orbisius,writing DFW,DFR,distraction free writing
-Requires at least: 3.0
+Requires at least: 3.3
 Tested up to: 4.2.2
 Stable tag: 1.0.0
 License: GPLv2 or later
@@ -53,7 +53,10 @@ n/a
 == Changelog ==
 
 = 1.0.1 =
+* Added richtext editor
+* Removed add new lines ... not needed at the moment.
 * Corrections in the readme.
+* Added calls to wp_head() and wp_footer() to get tinymce's libs loaded
 
 = 1.0.0 =
 * Initial Release
