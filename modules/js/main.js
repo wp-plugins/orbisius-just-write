@@ -120,6 +120,8 @@ var just_write_app = {
                 //data: $(this).serialize()
             }).done(function (json) {
                 $('#sites_container').html(json.buffer);
+                $('#cats_container').html(json.cats_buffer);
+                $('#tags_container').html(json.tags_buffer);
                 just_write_app.loader();
 
                 if (typeof cb != 'undefined') {

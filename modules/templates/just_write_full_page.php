@@ -188,8 +188,20 @@
                       </div> -->
                     </div>
                   </div> <!-- /.panel -->
+
+                  <div class="panel panel-primary">
+                    <div class="panel-heading">
+                      <h3 class="panel-title">Categories / Tags</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div id="cats_container" class="cats_container"></div>
+                        <div id="tags_container" class="tags_container"></div>
+                    </div>
+                  </div> <!-- /.panel -->
+
                 </div><!-- /.col-sm-4 -->
             </form>
+
 
 		</div><!-- /.row -->
 

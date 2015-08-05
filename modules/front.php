@@ -13,7 +13,6 @@ add_action( 'wp_ajax_orb_just_write_auto_save', array( $pm_front, 'auto_save' ) 
 add_action( 'wp_ajax_orb_just_write_delete_site', array( $pm_front, 'delete_site' ) );
 
 class orb_just_write_front {
-
     /**
      * Singleton pattern i.e. we have only one instance of this obj
      *
@@ -62,6 +61,8 @@ class orb_just_write_front {
 
             $tpl_file = ORBISIUS_JUST_WRITE_DIR . '/modules/templates/just_write_full_page.php';
             include $tpl_file;
+
+
             exit;
         }
     }
@@ -138,7 +139,7 @@ class orb_just_write_front {
             $first_id = 0;
             $last_found = 0;
 
-            foreach ($records as $idx => $rec) {
+            foreach ( $records as $idx => $rec ) {
                 $drop_down[ $rec[ 'ID' ] ] = $rec['user'] . ' | '. $rec['post_title'];
 
                 if ( $idx == 0 ) {
@@ -181,6 +182,8 @@ class orb_just_write_front {
 
         $return = array(
             'buffer' => $buff,
+            'cats_buffer' => 'cats',
+            'tags_buffer' => 'tags',
             'message' => $res->success() ? 'Done.' : $res->data('error_message'),
             'status'  => $res->success(),
             'site_id' => $res->data('id'),
