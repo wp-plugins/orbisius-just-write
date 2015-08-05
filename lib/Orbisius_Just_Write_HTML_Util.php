@@ -67,6 +67,8 @@ class Orbisius_Just_Write_HTML_Util {
 
         foreach ($options as $key => $label) {
             $selected = $sel == $key ? ' selected="selected"' : '';
+            $key = esc_attr( $key );
+            $label = esc_attr( $label );
             $html .= "\t<option value='$key' $selected>$label</option>\n";
         }
 
