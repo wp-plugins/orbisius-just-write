@@ -230,15 +230,17 @@ class orb_just_write_front {
 
                     $cats = $res->data('req_response');
 
-                    $last_used_cat_id = null;
+                    $last_used_cat_name = null;
                     $cat_drop_down = array( '' => '', );
 
+                    // For some weird reason category names are supposed to be passed.
                     foreach ( $cats as $rec ) {
-                        $cat_drop_down[ $rec[ 'categoryId' ] ] = $rec[ 'categoryName' ];
+                        $cat_drop_down[ $rec[ 'categoryName' ] ] = $rec[ 'categoryName' ];
+                        //$cat_drop_down[ $rec[ 'categoryId' ] ] = $rec[ 'categoryName' ];
                     }
 
-                    $cats_buffer .= Orbisius_Just_Write_HTML_Util::htmlSelect( 'cat_id',
-                        $last_used_cat_id, $cat_drop_down, " class='form-control2 XXXwide_field' XXXstyle='display:inline;' ");
+                    $cats_buffer .= Orbisius_Just_Write_HTML_Util::htmlSelect( 'cat_name',
+                        $last_used_cat_name, $cat_drop_down, " class='form-control2 XXXwide_field' XXXstyle='display:inline;' ");
                 }
             }
         }
@@ -370,6 +372,7 @@ class orb_just_write_front {
             $nl2br = !empty( $params['nl2br'] );
             $publish = !empty( $params['publish'] );
 
+            $cat_name = empty($params['cat_name']) ? '' : $params['cat_name'];
             $post_id = empty( $params['post_id'] ) ? 0 : intval( $params['post_id'] );
             $post_title = empty( $params['post_title'] ) ? '' : $params['post_title'];
             $post_content = empty( $params['post_content'] ) ? '' : $params['post_content'];
@@ -431,7 +434,7 @@ class orb_just_write_front {
                 'title' => $post_title,
                 'content' => $post_content,
                 'publish' => $publish,
-                'categories' => empty($params['cat_id']) ? '' : $params['cat_id'],
+                'categories' => $cat_name,
             );
 
             $res = $cb->insertPost( $post_params );

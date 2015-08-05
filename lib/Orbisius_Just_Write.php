@@ -143,8 +143,7 @@ class Orbisius_Just_Write {
         }
 
         if (!empty($param['categories'])) {
-            $param['categories'] = array_map('intval', (array) $param['categories']);
-            $post_params['categories'] = $param['categories'];
+            $post_params['categories'] = (array) $param['categories'];
         }
 
         if (!empty($param['tags'])) {
