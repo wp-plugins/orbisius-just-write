@@ -56,7 +56,6 @@
 		  <div class="row">
 
 			<div class="col-sm-9">
-              
 			  <div class="panel panel-default">
 				<div class="panel-heading">
 				  <div>
@@ -117,7 +116,7 @@
 
 				</div>
 			  </div>
-			</div><!-- /.col-sm-4 -->
+			</div><!-- /.col-sm-9 -->
 			
 			<div class="col-sm-3">
 			  <div class="panel panel-primary">
@@ -158,53 +157,47 @@
 
 				</div>
 			  </div> <!-- /.panel -->
-
-			</div><!-- /.col-sm-4 -->
-    	</form>
-
-            <form id='quick_form' class='quick_form' method="POST">
-                <div class="col-sm-3">
+  
+            
                   <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Share Feedback</h3>
-                    </div>
-                    <div class="panel-body">
-
-                      <div class="input-group">
-                          <textarea id="quick_contact_message" name="message" class="form-control" placeholder="How can we make it super awesome?" aria-describedby="basic-addon2"></textarea>
-                          <input type="text" id="quick_contact_email" name="email" class="form-control" value="<?php echo $quick_email; ?>" placeholder="Your Email you@example.com" />
-                      </div>
-
-                      <br/>
-                      <div>
-                        <button type="submit" class="btn btn-sm btn-primary" name="btn_publish">Send Message</button>
-                      </div>
-
-                      <!--<div class="checkbox">
-                          <label class="input-group">
-                              <input type="checkbox" name="store_creds" id="store_creds" />
-                              Store Credentials.
-                          </label>
-                      </div> -->
-                    </div>
+                        <div class="panel-heading">
+                            <h3 class="panel-title">Categories / Tags</h3>
+                        </div>
+                        <div class="panel-body">
+                            <div id="cats_container" class="cats_container"></div>
+                            <div id="tags_container" class="tags_container"></div>
+                        </div>
                   </div> <!-- /.panel -->
+  	</form>
 
-                  <div class="panel panel-primary">
-                    <div class="panel-heading">
-                      <h3 class="panel-title">Categories / Tags</h3>
-                    </div>
-                    <div class="panel-body">
-                        <div id="cats_container" class="cats_container"></div>
-                        <div id="tags_container" class="tags_container"></div>
-                    </div>
-                  </div> <!-- /.panel -->
+                  <form id='quick_form' class='quick_form' method="POST">
+                        <div class="panel panel-primary">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">Share Feedback</h3>
+                          </div>
+                          <div class="panel-body">
 
-                </div><!-- /.col-sm-4 -->
-            </form>
+                            <div class="input-group">
+                                <textarea id="quick_contact_message" name="message" class="form-control" placeholder="How can we make it super awesome?" aria-describedby="basic-addon2"></textarea>
+                                <input type="text" id="quick_contact_email" name="email" class="form-control" value="<?php echo $quick_email; ?>" placeholder="Your Email you@example.com" />
+                            </div>
 
+                            <br/>
+                            <div>
+                              <button type="submit" class="btn btn-sm btn-primary" name="btn_publish">Send Message</button>
+                            </div>
 
+                            <!--<div class="checkbox">
+                                <label class="input-group">
+                                    <input type="checkbox" name="store_creds" id="store_creds" />
+                                    Store Credentials.
+                                </label>
+                            </div> -->
+                          </div>
+                        </div> <!-- /.panel -->
+                  </form>
+            </div><!-- /.col-sm-3 -->
 		</div><!-- /.row -->
-
     </div> <!-- /container -->
 
     <!-- Bootstrap core JavaScript

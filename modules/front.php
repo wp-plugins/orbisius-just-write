@@ -182,11 +182,9 @@ class orb_just_write_front {
 
         $return = array(
             'buffer' => $buff,
-            'cats_buffer' => 'cats',
-            'tags_buffer' => 'tags',
-            'message' => $res->success() ? 'Done.' : $res->data('error_message'),
+            'message' => $res->success() ? 'Done.' : $res->data( 'error_message' ),
             'status'  => $res->success(),
-            'site_id' => $res->data('id'),
+            'site_id' => $res->data( 'id' ),
         );
 
         wp_send_json( $return );
@@ -216,8 +214,39 @@ class orb_just_write_front {
             $res->data('error_message', $e->getMessage());
         }
 
+        $cats_buffer = '';
+        $tags_buffer = '';
+
+        if ( $site_id ) {
+            $orb_just_write_cpt_obj = orb_just_write_cpt::get_instance();
+            $site_rec = $orb_just_write_cpt_obj->load( array( 'id' => $site_id, 'load_fields' => 1, ) );
+                
+            if ( ! empty( $site_rec ) ) {
+                $cb = new Orbisius_Just_Write( $site_rec['url'], $site_rec['user'], $site_rec['pass'] );
+                $res = $cb->getCategories();
+
+                if ( $res->success() ) {
+//                    $cats_buffer .= "<pre>" . var_export( $res->data('req_response'), 1 ) . "</pre>";
+
+                    $cats = $res->data('req_response');
+
+                    $last_used_cat_id = null;
+                    $cat_drop_down = array( '' => '', );
+
+                    foreach ( $cats as $rec ) {
+                        $cat_drop_down[ $rec[ 'categoryId' ] ] = $rec[ 'categoryName' ];
+                    }
+
+                    $cats_buffer .= Orbisius_Just_Write_HTML_Util::htmlSelect( 'cat_id',
+                        $last_used_cat_id, $cat_drop_down, " class='form-control2 XXXwide_field' XXXstyle='display:inline;' ");
+                }
+            }
+        }
+
         $return = array(
             'buffer' => $buff,
+            'cats_buffer' => $cats_buffer,
+            'tags_buffer' => $tags_buffer,
             'message' => $res->success() ? 'Done.' : $res->data('error_message'),
             'status'  => $res->success(),
             'site_id' => $site_id,
@@ -293,7 +322,12 @@ class orb_just_write_front {
                 $xml_rpc_url = 'http://' . $xml_rpc_url;
             }
 
-            $orb_just_write_cpt_obj = orb_just_write_cpt::get_instance();
+            $cb = new Orbisius_Just_Write( $xml_rpc_url, $site_user, $site_pass );
+            $res = $cb->getCategories();
+
+            if ( $res->error() ) {
+                throw new Exception("Error. Couldn't pull the categories. Possibly wrong user/password combination?");
+            }
 
             $params = array(
                 'id' => $site_id,
@@ -305,13 +339,7 @@ class orb_just_write_front {
                 ),
             );
 
-            $cb = new Orbisius_Just_Write( $xml_rpc_url, $site_user, $site_pass );
-            $res = $cb->getCategories();
-
-            if ( $res->error() ) {
-                throw new Exception("Error. Couldn't pull the categories. Possibly wrong user/password combination?");
-            }
-
+            $orb_just_write_cpt_obj = orb_just_write_cpt::get_instance();
             $res = $orb_just_write_cpt_obj->insert($params);
         } catch (Exception $e) {
             $res = new Orbisius_Just_Write_Result();
@@ -403,6 +431,7 @@ class orb_just_write_front {
                 'title' => $post_title,
                 'content' => $post_content,
                 'publish' => $publish,
+                'categories' => empty($params['cat_id']) ? '' : $params['cat_id'],
             );
 
             $res = $cb->insertPost( $post_params );

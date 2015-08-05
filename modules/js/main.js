@@ -120,13 +120,13 @@ var just_write_app = {
                 //data: $(this).serialize()
             }).done(function (json) {
                 $('#sites_container').html(json.buffer);
-                $('#cats_container').html(json.cats_buffer);
-                $('#tags_container').html(json.tags_buffer);
                 just_write_app.loader();
 
                 if (typeof cb != 'undefined') {
                     cb();
                 }
+
+                just_write_app.sites.load_site_extras();
 
                 $('#site_id').on('change', function () {
                     var site_id = parseInt( $('#site_id').val() );
@@ -149,6 +149,8 @@ var just_write_app = {
         load_site_extras : function(cb) {
             //$('#app_delete_site_button').off('click');
             //$('#sites_container').html('Loading sites...');
+            $('#cats_container').html('Loading ...');
+            
             var data = {
                 site_id : $('#site_id').val()
             };
@@ -159,6 +161,9 @@ var just_write_app = {
                 data: data
             }).done(function (json) {
                 $('#site_extras_container').html(json.buffer);
+                $('#cats_container').html(json.cats_buffer);
+                $('#tags_container').html(json.tags_buffer);
+
                 just_write_app.loader();
 
                 if (typeof cb != 'undefined') {

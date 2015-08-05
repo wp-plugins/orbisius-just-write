@@ -110,6 +110,7 @@ class Orbisius_Just_Write {
      *
      * @param array $param
      * @see http://seegatesite.com/remote-posting-wordpress-with-xml-rpc-metaweblog-newpost-and-ixr_library-class/
+     * @see http://djzone.im/2011/04/simple-xml-rpc-client-to-wordpress-made-easy/
      */
     public function insertPost($param) {
         $title = empty($param['title']) ? "Post Title" : $param['title']; // $title variable will insert your blog title
@@ -141,8 +142,13 @@ class Orbisius_Just_Write {
             $post_params['mt_keywords'] = htmlentities($param['keywords'], ENT_NOQUOTES, $this->encoding);
         }
 
-        if (!empty($param['categories'])) { // tags?
-            $post_params['categories'] = array($param['categories']); // encode???
+        if (!empty($param['categories'])) {
+            $param['categories'] = array_map('intval', (array) $param['categories']);
+            $post_params['categories'] = $param['categories'];
+        }
+
+        if (!empty($param['tags'])) {
+            $post_params['tags'] = array( $param['tags'] ); // encode???
         }
 
         if (!empty($param['customfields'])) {
