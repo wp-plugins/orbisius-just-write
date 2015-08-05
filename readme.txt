@@ -3,8 +3,8 @@ Contributors: lordspace,orbisius
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=7APYDVPBCSY9A
 Tags: wordpress,wp,blogging,blogger,blog,copywriting,content,content marketing,marketing,writing,marketing,dashboard,Orbisius,writing DFW,DFR,distraction free writing
 Requires at least: 3.3
-Tested up to: 4.2.2
-Stable tag: 1.0.1
+Tested up to: 4.2
+Stable tag: 1.0.2
 License: GPLv2 or later
 
 Allows you to post content on multiple WordPress sites from one central location.
@@ -51,6 +51,10 @@ Please do NOT use the WordPress forums or other places to seek support.
 n/a
 
 == Changelog ==
+
+= 1.0.2 =
+* Loading categories in the sidebar
+* Tested with WP 4.2.4
 
 = 1.0.1 =
 * Added richtext editor
